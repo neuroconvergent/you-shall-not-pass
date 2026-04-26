@@ -6,7 +6,7 @@ A Rust password/passphrase generator with quantum brute-force modelling. v1 deli
 
 ## Phases
 
-- [ ] **Phase 1: Library Hardening** — Secure the core library API before CLI wiring begins
+- [x] **Phase 1: Library Hardening** — Secure the core library API before CLI wiring begins
 - [ ] **Phase 2: CLI Core** — Working password generator CLI with entropy display
 - [ ] **Phase 3: Output & Security Hardening** — Pipe-safe output, core dump prevention, panic sanitization
 
@@ -25,7 +25,7 @@ A Rust password/passphrase generator with quantum brute-force modelling. v1 deli
 
 Plans:
 - [x] 01-01-PLAN.md — Fix rand 0.9 compilation, parameterize RNG, wrap password in Zeroizing, align calc_entropy validation
-- [ ] 01-02-PLAN.md — Create comprehensive test suite covering happy paths, error cases, entropy validation, and Zeroizing return
+- [x] 01-02-PLAN.md — Create comprehensive test suite covering happy paths, error cases, entropy validation, and Zeroizing return
 
 ### Phase 2: CLI Core
 **Goal**: User can generate passwords from the command line with full control over length and character sets, see classical and quantum entropy, and get help. The CLI is a working tool.
@@ -55,6 +55,6 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Library Hardening | 1/2 | In progress | 01-01: 2026-04-26 |
+| 1. Library Hardening | 2/2 | Complete | 01-01: 2026-04-26, 01-02: 2026-04-26 |
 | 2. CLI Core | 0/TBD | Not started | - |
 | 3. Output & Security Hardening | 0/TBD | Not started | - |

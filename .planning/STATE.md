@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-04-26)
 ## Current Position
 
 Phase: 1 of 3 (Library Hardening)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-04-26 — 01-01 completed (RNG parameterization + Zeroizing return)
+Plan: 2 of 2 in current phase
+Status: Complete
+Last activity: 2026-04-26 — 01-02 completed (14 integration tests for password_generator)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
+- Total plans completed: 2
 - Average duration: 5 min
-- Total execution time: 0.08 hours
+- Total execution time: 0.17 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1. Library Hardening | 1 | 2 | 5 min |
+| 1. Library Hardening | 2 | 2 | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (5 min)
+- Last 5 plans: 01-01 (5 min), 01-02 (5 min)
 - Trend: Baseline established
 
 *Updated after each plan completion*
@@ -48,6 +48,9 @@ Recent decisions affecting current work:
 - Library hardening (SEC-01, SEC-02) must complete before any CLI wiring
 - D-02 affirmed: RNG injected as `impl Rng` parameter (not `impl RngCore`)
 - `rand::rng()` thread-local CSPRNG replaces `OsRng` construction — infallible path
+- Tests use `rand::rng()` for all tests — consistent with D-02, ThreadRng is infallible
+- Struct update syntax `..DEFAULTS` for test config construction — cleaner than `.clone()`
+- Error-path tests are config-driven (not RNG-driven), making them deterministic
 
 ### Pending Todos
 
@@ -62,5 +65,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-04-26
-Stopped at: 01-01 completed — Summary created
-Resume file: .planning/phases/01-library-hardening/01-01-SUMMARY.md
+Stopped at: 01-02 completed — Phase 1 complete
+Resume file: .planning/phases/01-library-hardening/01-02-SUMMARY.md
