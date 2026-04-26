@@ -53,7 +53,7 @@ pub mod password_generator {
 
     type Result<T> = std::result::Result<T, PasswordError>;
 
-    pub fn generate_password(config: &Defaults, mut rng: impl Rng) -> Result<String> {
+    pub fn generate_password(config: &Defaults, mut rng: impl Rng) -> Result<Zeroizing<String>> {
         if config.length == 0 {
             return Err(PasswordError::EmptyLength);
         }
@@ -93,8 +93,7 @@ pub mod password_generator {
         picks.as_mut_slice().shuffle(&mut rng);
 
         let password: String = picks.iter().copied().collect();
-
-        Ok(password)
+        Ok(Zeroizing::new(password))
 
     }
 
@@ -107,6 +106,13 @@ pub mod password_generator {
         let groups = enabled_groups(config);
         if groups.is_empty() {
             return Err(PasswordError::NoCharsetGroups);
+        }
+
+        if config.length < groups.len() {
+            return Err(PasswordError::LengthTooShort {
+                required: groups.len(),
+                actual: config.length,
+            });
         }
 
         let avoid = build_avoid_set(config);
