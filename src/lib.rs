@@ -1,7 +1,7 @@
 pub mod password_generator {
     use std::collections::HashSet;
 
-    use rand::{seq::SliceRandom, Rng, RngCore};
+    use rand::{Rng, RngCore, seq::SliceRandom};
     use thiserror::Error;
     use zeroize::Zeroizing;
 
@@ -94,7 +94,6 @@ pub mod password_generator {
 
         let password: String = picks.iter().copied().collect();
         Ok(Zeroizing::new(password))
-
     }
 
     pub fn calc_entropy(config: &Defaults, mut rng: impl Rng) -> Result<f64> {

@@ -1,7 +1,7 @@
 use std::ops::Deref;
 
 use you_shall_not_pass::password_generator::{
-    calc_entropy, generate_password, Defaults, DEFAULTS, PasswordError,
+    DEFAULTS, Defaults, PasswordError, calc_entropy, generate_password,
 };
 
 // ---------------------------------------------------------------------------
@@ -121,7 +121,13 @@ fn test_length_too_short_error() {
     };
     let err = generate_password(&config, rand::rng()).unwrap_err();
     assert!(
-        matches!(err, PasswordError::LengthTooShort { required: 4, actual: 2 }),
+        matches!(
+            err,
+            PasswordError::LengthTooShort {
+                required: 4,
+                actual: 2
+            }
+        ),
         "expected LengthTooShort(required=4, actual=2), got {err:?}"
     );
 }
@@ -158,7 +164,13 @@ fn test_calc_entropy_length_too_short() {
     };
     let err = calc_entropy(&config, rand::rng()).unwrap_err();
     assert!(
-        matches!(err, PasswordError::LengthTooShort { required: 4, actual: 2 }),
+        matches!(
+            err,
+            PasswordError::LengthTooShort {
+                required: 4,
+                actual: 2
+            }
+        ),
         "expected LengthTooShort(required=4, actual=2), got {err:?}"
     );
 }
