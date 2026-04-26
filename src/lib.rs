@@ -1,3 +1,6 @@
+// Copyright 2026 Sundar Gurumurthy
+// SPDX-License-Identifier: BSD-3-Clause-No-Military-License
+
 pub mod password_generator {
     use std::collections::HashSet;
 
