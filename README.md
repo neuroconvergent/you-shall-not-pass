@@ -1,5 +1,9 @@
 # You Shall Not Pass
 
+> [!WARNING]
+> This repository was made primarily with AI tools, though human checking has
+> been done for security purposes.
+
 You Shall Not Pass is a Rust-based password and passphrase generator with
 quantum brute-force modelling. It aims to provide both a CLI and a GTK
 application for generating high-entropy secrets and visualising their
