@@ -20,8 +20,8 @@ Requirements for CLI phase — minimal working password generator wrapping the c
 
 ### Security
 
-- [ ] **SEC-01**: Library returns `Zeroizing<String>` from `generate_password()` instead of plain `String`
-- [ ] **SEC-02**: CLI handles `OsRng` failure with graceful error message (no panic)
+- [x] **SEC-01**: Library returns `Zeroizing<String>` from `generate_password()` instead of plain `String`
+- [x] **SEC-02**: CLI handles RNG failure with graceful error message (no panic) — resolved via `impl Rng` parameterization; production path uses infallible `rand::rng()`
 - [ ] **SEC-03**: CLI detects TTY vs pipe and routes password to stdout, entropy to stderr
 - [ ] **SEC-04**: CLI sets `RLIMIT_CORE=0` at startup to prevent core dumps containing secrets
 - [ ] **SEC-05**: CLI installs panic handler that sanitizes output (no secret leakage via Debug backtraces)
@@ -61,8 +61,8 @@ Deferred to future release. Tracked but not in current roadmap.
 | GEN-06 | Phase 2 | Pending |
 | GEN-07 | Phase 2 | Pending |
 | GEN-08 | Phase 3 | Pending |
-| SEC-01 | Phase 1 | Pending |
-| SEC-02 | Phase 1 | Pending |
+| SEC-01 | Phase 1 | Complete (01-01) |
+| SEC-02 | Phase 1 | Complete (01-01) |
 | SEC-03 | Phase 3 | Pending |
 | SEC-04 | Phase 3 | Pending |
 | SEC-05 | Phase 3 | Pending |
