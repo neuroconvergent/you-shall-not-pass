@@ -1,7 +1,7 @@
 pub mod password_generator {
     use std::collections::HashSet;
 
-    use rand::{rngs::OsRng, seq::SliceRandom, RngCore};
+    use rand::{seq::SliceRandom, Rng, RngCore};
     use thiserror::Error;
     use zeroize::Zeroizing;
 
@@ -53,7 +53,7 @@ pub mod password_generator {
 
     type Result<T> = std::result::Result<T, PasswordError>;
 
-    pub fn generate_password(config: &Defaults) -> Result<String> {
+    pub fn generate_password(config: &Defaults, mut rng: impl Rng) -> Result<String> {
         if config.length == 0 {
             return Err(PasswordError::EmptyLength);
         }
@@ -78,7 +78,6 @@ pub mod password_generator {
             return Err(PasswordError::EmptyCharacterPool);
         }
 
-        let mut rng = OsRng;
         let mut picks = Zeroizing::new(Vec::with_capacity(config.length));
 
         for (index, chars) in filtered_groups.iter().enumerate() {
@@ -99,7 +98,8 @@ pub mod password_generator {
 
     }
 
-    pub fn calc_entropy(config: &Defaults) -> Result<f64> {
+    pub fn calc_entropy(config: &Defaults, mut rng: impl Rng) -> Result<f64> {
+        let _ = &mut rng;
         if config.length == 0 {
             return Err(PasswordError::EmptyLength);
         }
@@ -185,7 +185,7 @@ pub mod password_generator {
         pool
     }
 
-    fn random_index(len: usize, rng: &mut OsRng) -> usize {
+    fn random_index(len: usize, rng: &mut impl RngCore) -> usize {
         debug_assert!(len > 0);
 
         let range = len as u64;
