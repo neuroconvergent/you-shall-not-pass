@@ -80,7 +80,7 @@ pub mod password_generator {
 
         let mut picks = Zeroizing::new(Vec::with_capacity(config.length));
 
-        for (index, chars) in filtered_groups.iter().enumerate() {
+        for chars in filtered_groups.iter() {
             let selection = chars[random_index(chars.len(), &mut rng)];
             picks.push(selection);
         }
@@ -130,7 +130,7 @@ pub mod password_generator {
         Ok(entropy)
     }
 
-    fn enabled_groups<'a>(config: &'a Defaults) -> Vec<&'a str> {
+    fn enabled_groups(config: &Defaults) -> Vec<&str> {
         let mut groups = Vec::new();
         for (index, group) in config.charset_groups.iter().enumerate() {
             let include = match index {
